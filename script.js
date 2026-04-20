@@ -474,8 +474,7 @@ playBtn.onclick = async () => {
         render(
         steps[steps.length - 1].array,
         [],
-        "Sorting Complete!",
-        "Final sorted order achieved → algorithm finished successfully"
+        "Sorting Complete!","Final sorted order achieved → algorithm finished successfully"
         );
         animateSortedBars();
         return;
