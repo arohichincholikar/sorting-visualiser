@@ -19,18 +19,18 @@ const speedSlider = document.getElementById("speed");
 
 function initializeArray() {
     baseArray = [];
-    for (let i = 1; i <= 50; i++) {  // you can change 50 → 100 if you want
-        baseArray.push(i); // spacing for better height (visual)
+    for (let i = 1; i <= 50; i++) { 
+        baseArray.push(i);
     }
 }
 
 // Generate random array
 function generateArray() {
     if (baseArray.length === 0) {
-        initializeArray(); // only once
+        initializeArray();
     }
 
-    array = shuffleArray(baseArray); // 🔥 only shuffle
+    array = shuffleArray(baseArray);
 
     steps = [];
     currentStep = 0;
@@ -100,7 +100,7 @@ function animateSortedBars() {
         }, index * 100);
     });
 
-    // after animation ends → return to normal
+    // after animation ends, return to normal
     setTimeout(() => {
         bars.forEach(bar => {
             bar.classList.remove("sorted");
@@ -474,7 +474,7 @@ playBtn.onclick = async () => {
         render(
         steps[steps.length - 1].array,
         [],
-        "✨ Sorting Complete!",
+        "Sorting Complete!",
         "Final sorted order achieved → algorithm finished successfully"
         );
         animateSortedBars();
