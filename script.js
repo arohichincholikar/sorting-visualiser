@@ -490,6 +490,7 @@ playBtn.onclick = async () => {
     // When finished
     if (currentStep >= steps.length) {
         isPlaying = false;
+        playBtn.innerText = "Play";
         render(
         steps[steps.length - 1].array,
         [],
@@ -507,6 +508,9 @@ resetBtn.onclick = () => {
     steps = [];
     comparisons = 0;
     swaps = 0;
+
+    // reset button text
+    playBtn.innerText = "Play";
 
     generateArray();
 
