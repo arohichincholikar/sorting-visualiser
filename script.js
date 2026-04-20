@@ -79,8 +79,8 @@ function render(arr, active = [], message = "", complexity = "") {
     });
 
     // AUTO UPDATE EXPLANATION
-    explanationBox.innerText = message || "Sorting...";
-    complexityText.innerText = complexity || "Analyzing complexity...";
+    explanationBox.innerText = message || "Start sorting to see explanation";
+    complexityText.innerText = complexity || "Time Complexity will appear here";
 }
 
 function updateComplexity(algo) {
