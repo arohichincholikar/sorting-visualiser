@@ -5,6 +5,7 @@ let steps = [];
 let currentStep = 0;
 let speed = 50;
 
+const algoSelect = document.getElementById("algo");
 const complexityText = document.getElementById("complexityText");
 const container = document.getElementById("array");
 const nextBtn = document.getElementById("next");
@@ -423,6 +424,24 @@ function heapSortSteps(arr) {
     }
 }
 
+algoSelect.onchange = () => {
+    isPlaying = false;
+    currentStep = 0;
+    steps = [];
+    comparisons = 0;
+    swaps = 0;
+    playBtn.innerText = "Play";
+
+    generateArray();
+
+    render(
+        array,
+        [],
+        "Start sorting to see explanation",
+        "Time Complexity will appear here"
+    );
+};
+
 // Next step
 nextBtn.onclick = () => {
     if (currentStep < steps.length) {
@@ -465,7 +484,7 @@ playBtn.onclick = async () => {
         console.log(step.complexity);
         render(step.array, step.active, step.message, step.complexity);
 
-        await new Promise(r => setTimeout(r, 200 - speed));
+        await new Promise(r => setTimeout(r, 150 - speed));
     }
 
     // When finished
@@ -484,8 +503,19 @@ playBtn.onclick = async () => {
 // Reset
 resetBtn.onclick = () => {
     isPlaying = false;
-    playBtn.innerText = "Play";
+    currentStep = 0;
+    steps = [];
+    comparisons = 0;
+    swaps = 0;
+
     generateArray();
+
+    render(
+        array,
+        [],
+        "Start sorting to see explanation",
+        "Time Complexity will appear here"
+    );
 };
 
 // Speed control
