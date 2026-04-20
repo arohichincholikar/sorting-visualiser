@@ -74,7 +74,6 @@ function render(arr, active = [], message = "", complexity = "") {
         if (active.includes(i)) {
             bar.classList.add("active");
         }
-
         container.appendChild(bar);
     });
 
@@ -83,19 +82,30 @@ function render(arr, active = [], message = "", complexity = "") {
     complexityText.innerText = complexity || "Time Complexity will appear here";
 }
 
-function updateComplexity(algo) {
-    if (algo === "Bubble Sort") {
-        timeBox.innerText = "Worst: O(n²) | Avg: O(n²) | Best: O(n)";
-        spaceBox.innerText = "O(1)";
-    } 
-    else if (algo === "Selection Sort") {
-        timeBox.innerText = "Worst: O(n²) | Avg: O(n²) | Best: O(n²)";
-        spaceBox.innerText = "O(1)";
-    } 
-    else {
-        timeBox.innerText = "Worst: O(n²) | Avg: O(n²) | Best: O(n)";
-        spaceBox.innerText = "O(1)";
-    }
+function animateSortedBars() {
+    const bars = document.querySelectorAll(".bar");
+
+    bars.forEach((bar, index) => {
+        setTimeout(() => {
+            // add sorted gradient
+            bar.classList.add("sorted");
+
+            // tiny pop animation
+            bar.style.transform = "scale(1.05)";
+
+            setTimeout(() => {
+                bar.style.transform = "scale(1)";
+            }, 200);
+
+        }, index * 100);
+    });
+
+    // after animation ends → return to normal
+    setTimeout(() => {
+        bars.forEach(bar => {
+            bar.classList.remove("sorted");
+        });
+    }, bars.length * 100 + 1200);
 }
 
 // Store steps for Bubble Sort
@@ -461,7 +471,14 @@ playBtn.onclick = async () => {
     // When finished
     if (currentStep >= steps.length) {
         isPlaying = false;
-        playBtn.innerText = "Play";
+        render(
+        steps[steps.length - 1].array,
+        [],
+        "✨ Sorting Complete!",
+        "Final sorted order achieved → algorithm finished successfully"
+        );
+        animateSortedBars();
+        return;
     }
 };
 

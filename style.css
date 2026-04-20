@@ -123,7 +123,10 @@ input[type="range"]::-webkit-slider-thumb {
 
 /* Sorted */
 .bar.sorted {
-    background: linear-gradient(180deg, #86efac, #34d399);
+    background: linear-gradient(180deg, #fef9c3, #86efac);
+    transition: all 0.4s ease;
+    border-radius: 12px 12px;
+    transform: scale(1.03);
 }
 
 .array-container {
