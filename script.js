@@ -18,6 +18,30 @@ const timeBox = document.getElementById("time");
 const spaceBox = document.getElementById("space");
 const speedSlider = document.getElementById("speed");
 
+function updateSliderBackground() {
+    let value = speedSlider.value;
+    let min = speedSlider.min;
+    let max = speedSlider.max;
+
+    let percent = ((value - min) / (max - min)) * 100;
+
+    speedSlider.style.background = `
+        linear-gradient(
+            90deg,
+            #f9a8d4 0%,
+            #c4b5fd ${percent}%,
+            #d1d5db ${percent}%,
+            #d1d5db 50%
+        )
+    `;
+}
+
+speedSlider.addEventListener("input", updateSliderBackground);
+updateSliderBackground();
+
+speedSlider.addEventListener("input", updateSliderBackground);
+updateSliderBackground();
+
 function initializeArray() {
     baseArray = [];
     for (let i = 1; i <= 50; i++) { 

@@ -60,36 +60,32 @@ select {
     background: #fff;
 }
 
+/* 1. Target the slider container/input */
 input[type="range"] {
-    appearance: none;
     -webkit-appearance: none;
-    width: 220px;
-    height: 10px;
-    background: transparent;
-    cursor: pointer;
+    appearance: none;
+    width: 140px;
+    height: 6px;           
+    background: #f1f5f9; 
+    border-radius: 5px;
+    outline: none;
+    padding: 0;
+    margin: 0 10px;
 }
 
-/* Track */
-input[type="range"]::-webkit-slider-runnable-track {
-    height: 8px;
-    background: linear-gradient(135deg, #f9a8d4, #c4b5fd);
-    border: none;
-    border-radius: 20px;
-    box-shadow: none;
-}
-
-/* Thumb */
+/* 2. Style the "Thumb" (the circle you grab) */
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
+    appearance: none;
     width: 18px;
     height: 18px;
+    background: linear-gradient(135deg, #f9a8d4, #c4b5fd);    /* Your pink theme color */
     border-radius: 50%;
-    background: linear-gradient(135deg, #f9a8d4, #c4b5fd);
-    margin-top: -5px;
     cursor: pointer;
-    border: none;
+    border: none; /* Gives it a clean "pop" */
     box-shadow: none;
 }
+
 
 /* Array container */
 .array-container {
