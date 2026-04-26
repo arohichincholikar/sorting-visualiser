@@ -4,6 +4,8 @@ let array = [];
 let steps = [];
 let currentStep = 0;
 let speed = 50;
+let customArray = [];
+let isCustomMode = false;
 
 const algoSelect = document.getElementById("algo");
 const complexityText = document.getElementById("complexityText");
@@ -17,6 +19,8 @@ const explanationBox = document.getElementById("explanation");
 const timeBox = document.getElementById("time");
 const spaceBox = document.getElementById("space");
 const speedSlider = document.getElementById("speed");
+const customInput = document.getElementById("customInput");
+const loadCustom = document.getElementById("loadCustom");
 
 function updateSliderBackground() {
     let value = speedSlider.value;
@@ -448,23 +452,61 @@ function heapSortSteps(arr) {
     }
 }
 
-algoSelect.onchange = () => {
-    isPlaying = false;
-    currentStep = 0;
-    steps = [];
-    comparisons = 0;
-    swaps = 0;
-    playBtn.innerText = "Play";
+if (algoSelect) {
+    algoSelect.onchange = () => {
+        isPlaying = false;
+        currentStep = 0;
+        steps = [];
+        comparisons = 0;
+        swaps = 0;
+        playBtn.innerText = "Play";
 
-    generateArray();
+        if (isCustomMode) {
+            array = [...customArray];
+        } else {
+            generateArray();
+        }
 
-    render(
-        array,
-        [],
-        "Start sorting to see explanation",
-        "Time Complexity will appear here"
-    );
-};
+        render(
+            array,
+            [],
+            "Start sorting to see explanation",
+            "Time complexity will appear here"
+        );
+    };
+}
+
+if (loadCustom) {
+    loadCustom.onclick = () => {
+        const values = customInput.value
+            .split(/[\s,]+/)
+            .map(num => parseInt(num.trim()))
+            .filter(num => !isNaN(num));
+
+        if (values.length === 0) {
+            alert("Please enter valid numbers!");
+            return;
+        }
+
+        array = [...values];
+        customArray = [...values];
+        isCustomMode = true;
+
+        isPlaying = false;
+        currentStep = 0;
+        steps = [];
+        comparisons = 0;
+        swaps = 0;
+        playBtn.innerText = "Play";
+
+        render(
+            array,
+            [],
+            "✨ Custom input loaded!",
+            "Choose a sorting algorithm and press Play"
+        );
+    };
+}
 
 // Next step
 nextBtn.onclick = () => {
@@ -499,6 +541,27 @@ playBtn.onclick = async () => {
     // If paused → PLAY
     isPlaying = true;
     playBtn.innerText = "Pause";
+    if (steps.length === 0) {
+        let selectedAlgo = document.getElementById("algo").value;
+        if (selectedAlgo === "bubble") {
+            bubbleSortSteps(array);
+        }
+        else if (selectedAlgo === "selection") {
+            selectionSortSteps(array);
+        }
+        else if (selectedAlgo === "insertion") {
+            insertionSortSteps(array);
+        }
+        else if (selectedAlgo === "merge") {
+            mergeSortSteps(array);
+        }
+        else if (selectedAlgo === "quick") {
+            quickSortSteps(array);
+        }
+        else if (selectedAlgo === "heap") {
+            heapSortSteps(array);
+        }
+    }
 
     for (; currentStep < steps.length; currentStep++) {
 
@@ -532,11 +595,13 @@ resetBtn.onclick = () => {
     steps = [];
     comparisons = 0;
     swaps = 0;
-
-    // reset button text
     playBtn.innerText = "Play";
 
-    generateArray();
+    if (isCustomMode) {
+        array = [...customArray];
+    } else {
+        generateArray();
+    }
 
     render(
         array,
