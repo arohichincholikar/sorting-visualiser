@@ -479,9 +479,9 @@ if (algoSelect) {
 if (loadCustom) {
     loadCustom.onclick = () => {
         const values = customInput.value
-            .split(/[\s,]+/)
-            .map(num => parseInt(num.trim()))
-            .filter(num => !isNaN(num));
+        .split(/[\s,]+/)
+        .map(num => parseInt(num.trim()))
+        .filter(num => !isNaN(num));
 
         if (values.length === 0) {
             alert("Please enter valid numbers!");
